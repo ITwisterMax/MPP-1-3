@@ -1,0 +1,29 @@
+﻿<Window x:Class="AssemblyBrowserView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssemblyBrowserView"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid Margin="3,6,3.6,10.4">
+        <Button Command="{Binding OpenAssemblyCommand}"/>
+        <TreeView ItemsSource="{Binding NamespaceWrapper}" Margin="0,40,0,-3" HorizontalAlignment="Left" Width="1275">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Types}">
+                    <TextBlock Text="{Binding Name}" FontSize="12"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Members}">
+                            <TextBlock Text="{Binding WrapperDeclaration}" FontSize="12"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding WrapperDeclaration}" FontSize="12"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</Window>
